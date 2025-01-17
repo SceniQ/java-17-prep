@@ -12,6 +12,12 @@ public class B{
 		String textBlock = """
 			"Java Study Guide"
 				by Scott & Me :D!""";
-		System.out.println(textBlock);		
+		System.out.println(textBlock);	
+
+		int numKnives;
+		System.out.print("""
+		   "# forks = " + numForks +
+			" # knives = " + numKnives +
+			# cups = 0""");		
 	}
 }
