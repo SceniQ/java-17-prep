@@ -15,9 +15,24 @@ public class B{
 		System.out.println(textBlock);	
 
 		int numKnives;
-		System.out.print("""
+		System.out.println("""
 		   "# forks = " + numForks +
 			" # knives = " + numKnives +
 			# cups = 0""");		
+			
+		var test = "test";
+			test = null;
+			System.out.println(test);
+			
+		var num = 0;
+		System.out.println(num);
+		System.out.println(++num);
+		System.out.println(num);
+		System.out.println(num--);
+		System.out.println(num);
+		
+		var num2 = 2;
+		System.out.println(num2--);
+		System.out.println(++num2);
 	}
 }
