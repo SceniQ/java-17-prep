@@ -34,5 +34,12 @@ public class B{
 		var num2 = 2;
 		System.out.println(num2--);
 		System.out.println(++num2);
+		
+		short w = 14;
+		float x = 13;
+		System.out.println(x);
+		double y = 30;
+		System.out.println(y);
+		var z1 = w * x / y;	
 	}
 }
