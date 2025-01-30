@@ -29,6 +29,18 @@ public class Operators{
 		short melody = (byte)(double)(note *= 2);
 		double song = melody;
 		float symphony = (float)((song == 1_000f) ? song * 2L : song);
+		
+		System.out.println(testSwitchExpr(Integer.parseInt(x[0])));
+	}
+	
+	private static String testSwitchExpr(int testNum){
+		String love = switch(testNum) {
+				case 1 -> "Goldfish";
+				case 2 -> "Trout";
+				default -> {yield "Swordfish";}
+		};
+		
+		return love;
 	}
 
 }
