@@ -3,7 +3,8 @@ public class Decisions{
 	public static void main(String... x){
 		//testPatternMatching(10);
 		//testPatternVariablesAndExpressions(10);
-		testTheSwitchStatement(2);
+		//testTheSwitchStatement(2);
+		testTheSwitchStatement(3);
 	}
 	
 	private static void testPatternMatching(Number number){
@@ -74,6 +75,7 @@ public class Decisions{
 			case 1,2: System.out.print("Lion");
 			case 3: System.out.print("Tiger");
 		}
+		
 		System.out.println();
 		//Prior to Java 14, the equivalent code would have been the following:
 		switch(day) {
@@ -81,8 +83,63 @@ public class Decisions{
 			case 3: System.out.print("Tiger");
 		}
 		
+		System.out.println();
 		//2. One last note you should be aware of for the exam: a switch statement is not required to contain any case
 		//statements. For example, this statement is perfectly valid:
 		switch(day) {}
+		
+		System.out.println();
+		//3. Going back to our printDayOfWeek() method, we can rewrite it to use a switch statement
+		//instead of if/else statements:
+		switch(day) {
+			case 0:
+			System.out.print("Sunday");
+			break;
+			case 1:
+			System.out.print("Monday");
+			break;
+			case 2:
+			System.out.print("Tuesday");
+			break;
+			case 3:
+			System.out.print("Wednesday");
+			break;
+			case 4:
+			System.out.print("Thursday");
+			break;
+			case 5:
+			System.out.print("Friday");
+			break;
+			case 6:
+			System.out.print("Saturday");
+			break;
+			default:
+			System.out.print("Invalid value");
+			break;
+		}
+		//4. Exiting with break Statements (as shown above):
+		// A break statement terminates the switch statement and returns flow control to the enclosing process. Put simply, it ends the switch statement immediately.
+		
+		System.out.println();
+		//5. Determining Acceptable Case Values
+		//the values in each case statement must be compile-time constant values of the same data type as the switch value
+		//you can’t have a case statement value that requires executing a method at runtime, even if that method always returns the same value.
+		final int bananas = 1;
+		int apples = 2;
+		int numberOfAnimals = 3;
+		final int cookies = 0;//getCookies(); //if method exists
+		switch(numberOfAnimals) {
+			case bananas:
+			case apples: // DOES NOT COMPILE
+			//case getCookies(): // DOES NOT COMPILE
+			case cookies : // DOES NOT COMPILE
+			case 3 * 5 : //as expressions are allowed as case values, provided the value can be resolved at compile-time
+		}
+		
 	}
+	
+	private static void testTheSwitchExpression(int day){
+		
+	}
+	
 }
