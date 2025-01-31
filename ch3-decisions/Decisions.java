@@ -4,7 +4,9 @@ public class Decisions{
 		//testPatternMatching(10);
 		//testPatternVariablesAndExpressions(10);
 		//testTheSwitchStatement(2);
-		testTheSwitchStatement(3);
+		//testTheSwitchStatement(3);
+		//testTheSwitchExpression(5);
+		testWritingWhileLoops();
 	}
 	
 	private static void testPatternMatching(Number number){
@@ -130,16 +132,92 @@ public class Decisions{
 		final int cookies = 0;//getCookies(); //if method exists
 		switch(numberOfAnimals) {
 			case bananas:
-			case apples: // DOES NOT COMPILE
+			//case apples: // DOES NOT COMPILE
 			//case getCookies(): // DOES NOT COMPILE
-			case cookies : // DOES NOT COMPILE
+			//case cookies : // DOES NOT COMPILE
 			case 3 * 5 : //as expressions are allowed as case values, provided the value can be resolved at compile-time
 		}
 		
 	}
 	
 	private static void testTheSwitchExpression(int day){
+		/**
+		- The switch expression supports two types of branches: an expression and	a block. 
+		Each has different syntactical rules on how it must be created.
 		
+		- Each case or default expression requires a semicolon as well as the assignment itself.
+		**/
+		
+		//1. a switch expression supports zero or many case branches and an optional default branch.
+		var result = switch(day) {
+			case 0 -> "Sunday";
+			case 1 -> "Monday";
+			case 2 -> "Tuesday";
+			case 3 -> "Wednesday";
+			case 4 -> "Thursday";
+			case 5 -> "Friday";
+			case 6 -> "Saturday";
+			default -> "Invalid value";
+		};
+		System.out.print(result);
+		System.out.println();
+		
+		//2. case statements can take multiple values, separated by commas
+		switch(day) {
+			case 1, 2, 3 -> System.out.print("Winter");
+			case 4, 5, 6 -> System.out.print("Spring");
+			case 7, 8, 9 -> System.out.print("Summer");
+			case 10, 11, 12 -> System.out.print("Fall");
+		}
+		System.out.println();
+		
+		//3. All of the branches of a switch expression that do not throw an exception must return a consistent data type (if the switch expression returns a value)
+		int measurement = 10;
+		int size = switch(measurement) {
+			case 5 -> 1;
+			case 10 -> (short)2;
+			default -> 5;
+			case 20 -> "3"; // DOES NOT COMPILE
+			case 40 -> 4L; // DOES NOT COMPILE
+			case 50 -> null; // DOES NOT COMPILE
+		};
+		System.out.println();
+		
+		//4. If the switch expression returns a value, then every branch that isn’t an expression must yield a value.
+		int fish = 5;
+		int length = 12;
+		var name = switch(fish) {
+			case 1 -> "Goldfish";
+			case 2 -> {yield "Trout";}
+			case 3 -> {
+				if(length > 10) yield "Blobfish";
+				else yield "Green";
+			}
+			default -> "Swordfish";
+		};
+		System.out.println();
+		
+		//5. A default branch is required unless all cases are covered or no value is returned.
+		//switch expression that returns a value must handle all possible input values
+
+		var canis = 5;
+		String type = switch(canis) { // DOES NOT COMPILE
+			case 1 -> "dog";
+			case 2 -> "wolf";
+			case 3 -> "coyote";
+		};
+		
+		//If the switch expression takes an enum value, add a case branch for every possible enum values
+		enum Season {WINTER, SPRING, SUMMER, FALL}
+		var resultWeather = switch(Season) {
+			case WINTER -> "Cold";	
+			case SPRING -> "Rainy";
+			case SUMMER -> "Hot";
+			case FALL -> "Warm";
+		};
 	}
 	
+	private static void testWritingWhileLoops(){
+		
+	}
 }
