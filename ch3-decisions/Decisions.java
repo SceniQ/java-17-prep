@@ -6,7 +6,8 @@ public class Decisions{
 		//testTheSwitchStatement(2);
 		//testTheSwitchStatement(3);
 		//testTheSwitchExpression(5);
-		testWritingWhileLoops();
+		//testTheWhileStatement(5);
+		testTheDoWhileStatement();
 	}
 	
 	private static void testPatternMatching(Number number){
@@ -177,9 +178,9 @@ public class Decisions{
 			case 5 -> 1;
 			case 10 -> (short)2;
 			default -> 5;
-			case 20 -> "3"; // DOES NOT COMPILE
-			case 40 -> 4L; // DOES NOT COMPILE
-			case 50 -> null; // DOES NOT COMPILE
+			//case 20 -> "3"; // DOES NOT COMPILE
+			//case 40 -> 4L; // DOES NOT COMPILE
+			//case 50 -> null; // DOES NOT COMPILE
 		};
 		System.out.println();
 		
@@ -201,23 +202,51 @@ public class Decisions{
 		//switch expression that returns a value must handle all possible input values
 
 		var canis = 5;
-		String type = switch(canis) { // DOES NOT COMPILE
-			case 1 -> "dog";
-			case 2 -> "wolf";
-			case 3 -> "coyote";
-		};
+		//String type = switch(canis) { // DOES NOT COMPILE
+		//	case 1 -> "dog";
+		//	case 2 -> "wolf";
+		//	case 3 -> "coyote";
+		//};
 		
 		//If the switch expression takes an enum value, add a case branch for every possible enum values
-		enum Season {WINTER, SPRING, SUMMER, FALL}
-		var resultWeather = switch(Season) {
-			case WINTER -> "Cold";	
-			case SPRING -> "Rainy";
-			case SUMMER -> "Hot";
-			case FALL -> "Warm";
-		};
+		//enum Season {WINTER, SPRING, SUMMER, FALL}
+		//var resultWeather = switch(season) {
+		//	case WINTER -> "Cold";	
+		//	case SPRING -> "Rainy";
+		//	case SUMMER -> "Hot";
+		//	case FALL -> "Warm";
+		//};
 	}
 	
-	private static void testWritingWhileLoops(){
+	private static void testTheWhileStatement(int bitesOfCheese){
+		/**
+		A loop is a repetitive control structure that can execute a statement of code multiple times in succession
+		**/
+		
+		//1. During execution, the boolean expression is evaluated before each iteration of the loop and exits if the evaluation returns false
+		int counter = 0;
+		while (counter < 10) {
+			double price = counter * 10;
+			System.out.println(price);
+			counter++;
+		}
+		int roomInBelly = 5;
+		while (bitesOfCheese > 0 && roomInBelly > 0) {
+			bitesOfCheese--;
+			roomInBelly--;
+		}
+		System.out.println(bitesOfCheese+" pieces of cheese left");
+		
+		//2. While loops are often used in places where you expect zero or more executions of the loop. Simply put, the body of the loop may not execute at all or may
+		//execute many times.
+		int full = 5;
+		while(full < 5) {
+			System.out.println("Not full!");
+			full++;
+		}
+	}
+	
+	private static void testTheDoWhileStatement(){
 		
 	}
 }
