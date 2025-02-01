@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Decisions{
 	
 	public static void main(String... x){
@@ -7,7 +11,10 @@ public class Decisions{
 		//testTheSwitchStatement(3);
 		//testTheSwitchExpression(5);
 		//testTheWhileStatement(5);
-		testTheDoWhileStatement();
+		//testTheDoWhileStatement();
+		//testTheForLoop();
+		//testTheForEachLoop();
+		testNestedLoops();
 	}
 	
 	private static void testPatternMatching(Number number){
@@ -247,6 +254,133 @@ public class Decisions{
 	}
 	
 	private static void testTheDoWhileStatement(){
+		/**
+		Unlike a while loop, though, a do/while loop guarantees that the statement or block will be executed at least once.
+		**/
+		int lizard = 0;
+		do {
+			lizard++;
+		} while(false);
+		System.out.println(lizard);
+	}
+	
+	private static void testTheForLoop(){
+		/**
+		A basic for loop has the same conditional boolean expression and statement, or block of statements, as the while loops, 
+		as well as two new sections: an initialization block and an update statement.
+		**/
 		
+		//1. Variables declared in the initialization block of a for loop have limited scope and are accessible only within the for loop.
+		for(int i=0; i < 10; i++)
+			System.out.println("Value is: "+i);
+		//System.out.println(i); // DOES NOT COMPILE
+		System.out.println();
+		
+		//2. Alternatively, variables declared before the for loop and assigned a value in the initialization
+		//block may be used outside the for loop because their scope precedes the creation of the for loop.
+		int i;
+		for(i=0; i < 10; i++)
+			System.out.println("Value is: "+i);
+		System.out.println(i);
+		System.out.println();
+		
+		//3. Printing Elements in Reverse
+		for (var counter = 5; counter > 0; counter--){
+			System.out.print(counter + " ");
+		}
+		System.out.println();
+		
+		//4. Creating an Infinite Loop - This example reinforces the fact that the components of the for loop are each optional
+		// press ctrl+c to terminate infinte loop!
+		//for( ; ; )
+		//	System.out.println("Hello World");
+		System.out.println();
+		
+		//5. Adding Multiple Terms to the for Statement - the update statement can modify multiple variables
+		int x = 0;
+		for(long y = 0, z = 4; x < 5 && y < 10; x++, y++) {
+			System.out.print(y + " "); 
+		}
+		System.out.print(x + " ");
+		System.out.println();
+		
+		//6. Redeclaring a Variable in the Initialization Block
+		//int x = 0;
+		//for(int x = 4; x < 5; x++) // DOES NOT COMPILE - variable a;ready declared!
+		//	System.out.print(x + " ");
+		//We can fix this loop by removing the declaration of x from the for loop as follows:
+		for(x = 0; x < 5; x++)
+			System.out.print(x + " ");	
+		System.out.println();
+		
+		//7. Using Incompatible Data Types in the Initialization Block - The variables in the initialization block must all be of the same type!
+		//int x = 0;
+		//for(long y = 0, int z = 4; x < 5; x++) // DOES NOT COMPILE
+		//	System.out.print(y + " ");
+		System.out.println();
+		
+		//8. Using Loop Variables Outside the Loop - 
+		for(long y = 0, x2 = 4; x < 5 && y < 10; x2++, y++)
+			System.out.print(y + " ");
+		//System.out.print(x); // DOES NOT COMPILE
+		System.out.println();
+		
+	}
+	
+	private static void testTheForEachLoop(){
+		/**
+		The for-each loop is a specialized structure designed to iterate over arrays and various Collections Framework classes.
+		
+		The right side of the for-each loop must be one of the following:
+		# A built-in Java array
+		# An object whose type implements java.lang.Iterable
+		**/
+		
+		//1. Compare these two methods that both print the values of an array, one using a traditional
+		//for loop and the other using a for-each loop:
+		String[] names = new String[]{"1","2","3"};
+		for(int counter=0; counter<names.length; counter++)
+			System.out.println(names[counter]);
+		for(var name : names)
+			System.out.println(name);
+		System.out.println();
+		
+		//2. We can also use a for-each loop on a List, since it implements Iterable.
+		List<String> nameList = Arrays.asList("1","2","3");
+		for(var name : nameList)
+			System.out.println(name);
+		
+		//3. On each iteration, a for-each loop assigns a variable with the same type as the generic argument
+		String birds = "Jay";
+		//for(String bird : birds) // DOES NOT COMPILE
+		//	System.out.print(bird + " ");
+		String[] sloths = new String[3];
+		//for(int sloth : sloths) // DOES NOT COMPILE
+		//	System.out.print(sloth + " ");
+	}
+	
+	private static void testNestedLoops(){
+		/**
+		A nested loop is a loop that contains another loop, including while, do/while, for, and for-each loops.
+		**/
+		int[][] myComplexArray = {{5,2,1,3},{3,9,8,9},{5,7,12,7}};
+		for(int[] mySimpleArray : myComplexArray) {
+			for(int i=0; i<mySimpleArray.length; i++) {
+				System.out.print(mySimpleArray[i]+"\t");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		
+		//1. Nested loops can include while and do/while
+		int hungryHippopotamus = 8;
+		while(hungryHippopotamus>0) {
+			do {
+				hungryHippopotamus -= 2;
+			} while (hungryHippopotamus>5);
+			hungryHippopotamus--;
+			System.out.print(hungryHippopotamus+", ");
+		}
+		System.out.println();
 	}
 }
