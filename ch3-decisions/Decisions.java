@@ -14,7 +14,11 @@ public class Decisions{
 		//testTheDoWhileStatement();
 		//testTheForLoop();
 		//testTheForEachLoop();
-		testNestedLoops();
+		//testNestedLoops();
+		//testAddingOptionalLabels();
+		//testTheBreakStatement();
+		//testTheContinueStatement();
+		testTheReturnStatement();
 	}
 	
 	private static void testPatternMatching(Number number){
@@ -382,5 +386,76 @@ public class Decisions{
 			System.out.print(hungryHippopotamus+", ");
 		}
 		System.out.println();
+	}
+	
+	private static void testAddingOptionalLabels(){
+		/**
+		A label is an optional pointer to the head of a statement that allows the application flow to jump to it or break from it. It is a single
+		identifier that is followed by a colon (:).
+		**/
+		int[][] myComplexArray = {{5,2,1,3},{3,9,8,9},{5,7,12,7}};
+		OUTER_LOOP: for(int[] mySimpleArray : myComplexArray) {
+			INNER_LOOP: for(int i=0; i<mySimpleArray.length; i++) {
+				System.out.print(mySimpleArray[i]+"\t");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		
+		//1. 
+		
+		System.out.println();
+		
+	}
+	
+	private static void testTheBreakStatement(){
+		/**
+		Break statement transfers the flow of control out to the enclosing statement
+		
+		Without a label parameter, the break statement will terminate the nearest inner loop it is currently in the process of executing.
+		**/
+		int[][] list = {{1,13},{5,2},{2,2}};
+		int searchValue = 2;
+		int positionX = -1;
+		int positionY = -1;
+		PARENT_LOOP: for(int i=0; i<list.length; i++) {
+			for(int j=0; j<list[i].length; j++) {
+				if(list[i][j]==searchValue) {
+					positionX = i;
+					positionY = j;
+					break PARENT_LOOP;
+				}
+			}		
+		}
+		if(positionX==-1 || positionY==-1){
+			System.out.println("Value "+searchValue+" not found");
+		} else {
+			System.out.println("Value "+searchValue+" found at: " +
+				"("+positionX+","+positionY+")");
+		}
+		
+	}
+	
+	private static void testTheContinueStatement(){
+		/**
+		The continue causes flow to finish the execution of the current loop iteration
+		
+		While the break statement transfers control to the enclosing statement, the continue
+		statement transfers control to the boolean expression that determines if the loop should continue.
+		**/
+		CLEANING: for(char stables = 'a'; stables<='d'; stables++) {
+			for(int leopard = 1; leopard<4; leopard++) {
+				if(stables=='b' || leopard==2) {
+					continue CLEANING;
+				}
+				System.out.println("Cleaning: "+stables+","+leopard);
+			}
+		}
+		System.out.println();
+	}
+	
+	private static void testTheReturnStatement(){
+		/**
+		**/
 	}
 }
