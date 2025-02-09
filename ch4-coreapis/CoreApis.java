@@ -1,3 +1,6 @@
+import java.util.*;
+import java.util.Arrays;
+
 public class CoreApis{
 	public static void main(String... coreapis){
 		//testConcatenation();
@@ -6,7 +9,11 @@ public class CoreApis{
 		//testImportantStringBuilderMethods();
 		//testEqualsMethodAndReferenceEquality();
 		//testTheStringPool();
-		testCreatingAnArrayOfPrimitives();
+		//testCreatingAnArrayOfPrimitives();
+		//testCreatingAnArrayWithReferenceVariables();
+		//testUsingAnArray();
+		//testSorting();
+		testSearching();
 	}
 	
 	private static void testConcatenation(){
@@ -375,16 +382,125 @@ public class CoreApis{
 		int []numAnimals3;
 		int numAnimals4[];
 		int numAnimals5 [];
-		
-		//2. Creating an Array with Reference Variables
-		//We can call equals() because an array is an object. It returns true because of reference
-		//equality. The equals() method on arrays does not look at the elements of the array.
-		//Remember, this would work even on an int[] too. The type int is a primitive; int[] is an object.
+	}
+	
+	private static void testCreatingAnArrayWithReferenceVariables(){
+		/**
+		We can call equals() because an array is an object. It returns true because of reference
+		equality. The equals() method on arrays does not look at the elements of the array.
+		Remember, this would work even on an int[] too. The type int is a primitive; int[] is an object.
+		**/
+		//The array does not allocate space for the String objects. Instead, 
+		//it allocates space for a reference to where the objects are really stored.
 		String[] bugs = { "cricket", "beetle", "ladybug" };
 		String[] alias = bugs;
+		//We can call equals() because an array is an object. It returns
+		//true because of reference equality. The equals()
+		//method on arrays does not look at the elements of the array.
 		System.out.println(bugs.equals(alias)); // true
 		System.out.println(bugs.toString()); // [Ljava.lang.String;@160bc7c0
 		System.out.println();
 		
+		String names[] = new String[2];
+		String[] strings = { "stringValue" };
+		Object[] objects = strings;
+		String[] againStrings = (String[]) objects;
+		//againStrings[0] = new StringBuilder(); // DOES NOT COMPILE
+		objects[0] = new StringBuilder(); // Careful!
+		System.out.println();
+		
+		
+	}
+	
+	private static void testUsingAnArray(){
+		/**
+		//3. Using an Array
+		**/
+		
+		String[] mammals = {"monkey", "chimp", "donkey"};
+		System.out.println(mammals.length); // 3
+		System.out.println(mammals[0]); // monkey
+		System.out.println(mammals[1]); // chimp
+		System.out.println(mammals[2]); // donkey
+		System.out.println();
+		
+		//1. Note that there are no parentheses after length since it is not a method. 
+		//Watch out for compiler errors like the following on the exam!
+		//System.out.println(mammals.length()); // DOES NOT COMPILE
+		var birds = new String[6];
+		
+		//2. The length attribute does not consider what is in the array; 
+		//it only considers how many slots have been allocated.
+		System.out.println(birds.length); 
+		
+		//3. It is very common to use a loop when reading from or writing to an array. This loop sets
+		//each element of numbers to five higher than the current index:
+		var numbers = new int[10];
+		for (int i = 0; i < numbers.length; i++)
+			numbers[i] = i + 5;
+		
+		//4. ArrayIndexOutOfBoundsException (Runtime Exception) - for our array of size 10?
+		//The first one is trying to see whether you know that indexes start with 0. Since we have 10
+		//elements in our array, this means only numbers[0] through numbers[9] are valid.
+		numbers[10] = 3;
+		//The second example assumes you are clever enough to know that 10 is invalid and disguises it by using the
+		//length field. However, the length is always one more than the maximum valid index
+		numbers[numbers.length] = 5;
+		//Finally, the for loop incorrectly uses <= instead of <, which is also a way of referring to that tenth element.
+		for (int i = 0; i <= numbers.length; i++)
+			numbers[i] = i + 5;
+	}
+	
+	private static void testSorting(){
+		/**
+		Java makes it easy to sort an array by providing a sort method—or
+		rather, a bunch of sort methods. Just like StringBuilder
+		allowed you to pass almost anything to append(), you
+		can pass almost any array to Arrays.sort().
+		
+		Arrays requires an import. To use it, you must have either of the following two statements
+		in your class:
+		import java.util.*; // import whole package including Arrays
+		import java.util.Arrays; // import just Arrays
+		**/
+		int[] numbers = { 6, 9, 1 };
+		Arrays.sort(numbers);
+		for (int i = 0; i < numbers.length; i++)
+			System.out.print(numbers[i] + " ");
+		
+		//1. Try this again with String types: This time the result might not be what you expect. This code outputs 10 100 9. The
+		//problem is that String sorts in alphabetic order, and 1 sorts before 9. (Numbers sort before
+		//letters, and uppercase sorts before lowercase.)
+		String[] strings = { "10", "9", "100" };
+		Arrays.sort(strings);
+		for (String s : strings)
+			System.out.print(s + " ");
+	}
+	
+	private static void testSearching(){
+		/**
+		Java also provides a convenient way to search, but only if the array is already sorted.
+		
+		'numbers' is a sorted array. Line 1 searches for the index of 2. The answer is index 0. Line 2 searches for
+		the index of 4, which is 1.
+		Line 3 searches for the index of 1. Although 1 isn’t in the list, the search can determine
+		that it should be inserted at element 0 to preserve the sorted order. Since 0 already means
+		something for array indexes, Java needs to subtract 1 to give us the answer of –1. Line 4
+		is similar. Although 3 isn’t in the list, it would need to be inserted at element 1 to preserve
+		the sorted order. We negate and subtract 1 for consistency, getting –1 –1, also known as –2.
+		Finally, line 5 wants to tell us that 9 should be inserted at index 4. We again negate and subtract 1, getting –4 –1,
+		also known as –5.
+		**/
+		int[] numbers = {2,4,6,8};
+		System.out.println(Arrays.binarySearch(numbers, 2)); // 0
+		System.out.println(Arrays.binarySearch(numbers, 4)); // 1
+		System.out.println(Arrays.binarySearch(numbers, 1)); // -1
+		System.out.println(Arrays.binarySearch(numbers, 3)); // -2
+		System.out.println(Arrays.binarySearch(numbers, 9)); // -5
+		
+		//1. 
+		int[] numbers = new int[] {3,2,1};
+		System.out.println(Arrays.binarySearch(numbers, 2));
+		System.out.println(Arrays.binarySearch(numbers, 3));
 	}
 }
