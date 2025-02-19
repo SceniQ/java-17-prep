@@ -6,7 +6,11 @@ public class Operators{
 		//testComplementAndNegationOperators();
 		//testIncrementAndDecrementOperators();
 		//testArithmeticOperators();
-		testNumericPromotion();
+		//testNumericPromotion();
+		//testCastingValues();
+		//testCompoundAssignmentOperators();
+		//testReturnValueOfAssignmentOperators();
+		testEqualityOperators();
 	}
 	
 	private static void testTypesOfOperators(){
@@ -123,12 +127,12 @@ public class Operators{
 		//2. Verifying Parentheses Syntax
 		//When working with parentheses, you need to make sure they are always valid and balanced.
 		//Consider the following examples:
-		long pigeon = 1 + ((3 * 5) / 3; // DOES NOT COMPILE
-		int blueJay = (9 + 2) + 3) / (2 * 4; // DOES NOT COMPILE
+		//long pigeon = 1 + ((3 * 5) / 3; // DOES NOT COMPILE
+		//int blueJay = (9 + 2) + 3) / (2 * 4; // DOES NOT COMPILE
 		//This example does not compile because Java, unlike some other programming languages,
 		//does not allow brackets, [], to be used in place of parentheses. If you replace the brackets
 		//with parentheses, the last example will compile just fine.
-		short robin = 3 + [(4 * 2) + 4]; // DOES NOT COMPILE
+		//short robin = 3 + [(4 * 2) + 4]; // DOES NOT COMPILE
 		
 		//3. Division and Modulus Operators
 		//The modulus operator, sometimes called the remainder operator, is simply the remainder when two numbers are
@@ -164,12 +168,12 @@ public class Operators{
 		//1. Let’s tackle some examples for illustrative purposes:
 		int x = 1;
 		long y = 33;
-		z = x * y; // The result z is then a long value.
+		var z = x * y; // The result z is then a long value.
 		
 		//2. What is the data type of x + y?
 		double a = 39.21;
-		float b = 2.1;
-		z = a + b; // This is actually a trick question, as the second line does not compile!
+		//float b = 2.1;
+		//z = a + b; // This is actually a trick question, as the second line does not compile!
 	}
 	
 	private static void testCastingValues(){
@@ -183,7 +187,90 @@ public class Operators{
 		int hair = (short) 2;
 		String type = (String) "Bird";
 		short tail = (short)(4 + 10);
-		long feathers = 10(long); // DOES NOT COMPILE
+		//long feathers = 10(long); // DOES NOT COMPILE
+		System.out.println();
+		
+		//2. Reviewing Primitive Assignments
+		//int fish = 1.0; // DOES NOT COMPILE -  cannot assign double value to int
+		//short bird = 1921222; // DOES NOT COMPILE - value too big for short
+		//int mammal = 9f; // DOES NOT COMPILE - cannot assign float to int
+		//long reptile = 192_301_398_193_810_323; // DOES NOT COMPILE - vaur too big for long
+		
+		//3. Applying Casting
+		//We can fix three of the previous examples by casting the results to a smaller data type.
+		//Remember, casting primitives is required any time you are going from a larger numerical
+		//data type to a smaller numerical data type, or converting from a floating-point
+		//number to an integral value.
+		int fish = (int)1.0;
+		short bird = (short)1921222; // Stored as 20678
+		int mammal = (int)9f;
+		//long reptile = (long)192301398193810323; // DOES NOT COMPILE - This still does not compile 
+		//because the value is first interpreted as an int by the compiler and is out of range.
+		long reptile = 192301398193810323L;
+		System.out.println();
+		
+		//4. Casting Values vs. Variables
+		//Revisiting our third numeric promotional rule, the compiler doesn’t require casting when
+		//working with literal values that fit into the data type.
+		byte hat = 1;
+		byte gloves = 7 * 10;
+		short scarf = 5;
+		short boots = 2 + 1;
+		//All of these statements compile without issue. On the other hand, neither of these statements
+		//compiles:
+		//short boots = 2 + hat; // DOES NOT COMPILE
+		//byte gloves = 7 * 100; // DOES NOT COMPILE
 	}
 	
+	private static void testCompoundAssignmentOperators(){
+		/**
+		Besides the simple assignment operator (=), Java supports numerous compound assignment
+		operators.
+		
+		Addition assignment: a += 5
+		Subtraction assignment: b -=0.2
+		Multiplication assignment: c *= 100
+		Division assignment: d /= 4
+		**/
+		//Compound operators are really just glorified forms of the simple assignment operator,
+		//with a built-in arithmetic or logical operation that applies the left and right sides of the
+		//statement and stores the resulting value in the variable on the left side of the statement.
+		int camel = 2, giraffe = 3;
+		camel = camel * giraffe; // Simple assignment operator
+		camel *= giraffe; // Compound assignment operator
+		
+		//Compound operators are useful for more than just shorthand—they
+		//can also save you from having to explicitly cast a value
+		long goat = 10;
+		int sheep = 5;
+		//sheep = sheep * goat; // DOES NOT COMPILE
+		sheep *= goat; // COMPILES
+	}
+	
+	private static void testReturnValueOfAssignmentOperators(){
+		/**
+		One final thing to know about assignment operators is that the result of an assignment is an
+		expression in and of itself equal to the value of the assignment
+		**/
+		long wolf = 5;
+		//The key here is that (wolf=3) does two things. First, it sets the value of the variable
+		//wolf to be 3. Second, it returns a value of the assignment, which is also 3.
+		long coyote = (wolf=3);
+		System.out.println(wolf); // 3
+		System.out.println(coyote); // 3
+		System.out.println();
+	}
+	
+	private static void testEqualityOperators(){
+		/**
+		The equals operator (==) and not equals operator (!=)
+		compare two operands and return a boolean value determining whether the expressions
+		or values are equal or not equal, respectively.
+		**/
+		//boolean monkey = true == 3; // DOES NOT COMPILE
+		//boolean ape = false != "Grape"; // DOES NOT COMPILE
+		//boolean gorilla = 10.2 == "Koko"; // DOES NOT COMPILE
+		boolean polar = (bear = true);
+		System.out.println(polar); // true
+	}
 }
