@@ -10,7 +10,8 @@ public class Operators{
 		//testCastingValues();
 		//testCompoundAssignmentOperators();
 		//testReturnValueOfAssignmentOperators();
-		testEqualityOperators();
+		//testEqualityOperators();
+		testRelationalOperators();
 	}
 	
 	private static void testTypesOfOperators(){
@@ -272,5 +273,20 @@ public class Operators{
 		//boolean gorilla = 10.2 == "Koko"; // DOES NOT COMPILE
 		boolean polar = (bear = true);
 		System.out.println(polar); // true
+		
+		//For object comparison, the equality operator is applied to the references to the objects,
+		//not the objects they point to.
+		var monday = new File("schedule.txt");
+		var tuesday = new File("schedule.txt");
+		var wednesday = tuesday;
+		System.out.println(monday == tuesday); // false
+		System.out.println(tuesday == wednesday); // true
+	}
+	
+	private static void testRelationalOperators(){
+		/**
+		We now move on to relational operators, which compare two expressions and return a
+		boolean value.
+		**/
 	}
 }
