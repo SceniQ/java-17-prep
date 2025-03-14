@@ -1,7 +1,9 @@
 public class BeyondClasses{
 	
 	public static void main(String... x){
-		
+		var s = Season.SUMMER;
+		System.out.println(Season.SUMMER); // SUMMER
+		System.out.println(s == Season.SUMMER); // true
 	}
 	
 	//1. Declaring and Using an Interface
@@ -91,9 +93,81 @@ public class BeyondClasses{
 		void play() {} // OK -play() is declared with package access in Husky
 	}
 	public class Georgette implements Poodle {
-		void play() {} // DOES NOT COMPILE -play() is public in Poodle
+		public void play() {} // DOES NOT COMPILE -play() is public in Poodle
 	}
 	
 	//7. Declaring Concrete Interface Methods
 	//
+	
+	//8. Writing a default Interface Method
+	//A default method is a method defined in an interface with the
+	//default keyword and includes a method body. It may be optionally overridden by a class implementing the
+	//interface.
+	public interface IsColdBlooded {
+		boolean hasScales();
+		default double getTemperature() {
+			return 10.0;
+		} 
+	}
+	//The following Snake class, which implements IsColdBlooded, must implement hasScales(). It
+	//may rely on the default implementation of getTemperature() or override the method with
+	//its own version:
+	public class Snake implements IsColdBlooded {
+		public boolean hasScales() { // Required override
+			return true;
+		}
+		public double getTemperature() { // Optional override
+			return 12;
+		}
+	}
+	
+	//Inheriting Duplicate default Methods
+	//
+	public interface Walk {
+		public default int getSpeed() { return 5; }
+	}
+	public interface Run {
+		public default int getSpeed() { return 10; }
+	}
+	public class Cat implements Walk, Run {
+		
+	public int getSpeed() { return Run.super.getSpeed(); }
+	} // DOES NOT COMPILE
+	
+	//Creating Simple Enums
+	//An enumeration, or enum for short, is like a fixed set of constants.
+	public enum Season1 {
+		WINTER, SPRING, SUMMER, FALL;
+	}
+	
+	//Adding Constructors, Fields, and Methods
+	public enum Season {
+		WINTER("Low"), SPRING("Medium"), SUMMER("High"), FALL("Medium");
+		private final String expectedVisitors;
+
+		private Season(String expectedVisitors) {
+			this.expectedVisitors = expectedVisitors;
+		}
+		
+		public void printExpectedVisitors() {
+			System.out.println(expectedVisitors);
+		} 
+	}
+	//After that, Java just returns the already constructed enum
+	//values. Given that explanation, you can see why this calls the constructor only once:
+	public enum OnlyOne {
+		ONCE(true);
+		private OnlyOne(boolean b) {
+			System.out.print("constructing,");
+		}
+	}
+
+	public class PrintTheOne {
+		public static void main(String[] args) {
+			System.out.print("begin,");
+			OnlyOne firstCall = OnlyOne.ONCE; // Prints constructing,
+			OnlyOne secondCall = OnlyOne.ONCE; // Doesn't print anything
+			System.out.print("end");
+		}
+	}
 }
