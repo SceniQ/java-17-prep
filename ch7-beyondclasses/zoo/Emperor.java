@@ -1,2 +1,2 @@
 package zoo;
-public final class Emperor {}
+public final class Emperor /**extends Penguin**/ {}

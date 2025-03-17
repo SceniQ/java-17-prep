@@ -4,6 +4,8 @@ public class BeyondClasses{
 		var s = Season.SUMMER;
 		System.out.println(Season.SUMMER); // SUMMER
 		System.out.println(s == Season.SUMMER); // true
+		
+		Season.SUMMER.printExpectedVisitors();
 	}
 	
 	//1. Declaring and Using an Interface
@@ -49,7 +51,7 @@ public class BeyondClasses{
 	//Java supports inheriting two abstract methods that have compatible method declarations.
 	public interface Herbivore { public void eatPlants(); }
 	public interface Omnivore { public void eatPlants(); }
-	public class Bear implements Herbivore, Omnivore {
+	public class Bear1 implements Herbivore, Omnivore {
 		public void eatPlants() {
 			System.out.println("Eating plants");
 		}		
@@ -153,6 +155,7 @@ public class BeyondClasses{
 			System.out.println(expectedVisitors);
 		} 
 	}
+	
 	//After that, Java just returns the already constructed enum
 	//values. Given that explanation, you can see why this calls the constructor only once:
 	public enum OnlyOne {
@@ -161,7 +164,6 @@ public class BeyondClasses{
 			System.out.print("constructing,");
 		}
 	}
-
 	public class PrintTheOne {
 		public static void main(String[] args) {
 			System.out.print("begin,");
@@ -170,4 +172,11 @@ public class BeyondClasses{
 			System.out.print("end");
 		}
 	}
+	
+	// Sealed Classes
+	//A sealed class is a class that restricts which other classes may directly
+	//extend it
+	public sealed class Bear permits Kodiak, Panda {}
+	public final class Kodiak extends Bear {}
+	public non-sealed class Panda extends Bear {}
 }
