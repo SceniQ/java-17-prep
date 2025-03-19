@@ -6,7 +6,13 @@ public class BeyondClasses{
 		System.out.println(s == Season.SUMMER); // true
 		
 		Season.SUMMER.printExpectedVisitors();
+		
+		System.out.println();
+		var crane =  new Crane(15,"Test");
+		System.out.println(crane.numberEggs());
+		System.out.println(crane.name());
 	}
+	
 	
 	//1. Declaring and Using an Interface
 	//In Java, an interface is defined with the interface keyword, analogous to the class keyword
@@ -179,4 +185,15 @@ public class BeyondClasses{
 	public sealed class Bear permits Kodiak, Panda {}
 	public final class Kodiak extends Bear {}
 	public non-sealed class Panda extends Bear {}
+	
+	// Sealed interface
+	class Duck{}
+	class Swan{}
+	class Floats{}
+	class Dolphin{}
+	interface Swimmer{}
+	//public sealed interface Swims permits Duck, Swan, Floater {}
+	//public sealed interface Floater extends Swims permits Dolphin {}
 }
+record Crane(int numberEggs, String name) { }
+
